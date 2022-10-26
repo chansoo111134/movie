@@ -1,53 +1,49 @@
 import React from 'react';
-import ProTypes from 'prop-types'
 
-function Food({name, picture, rating}) {
-  return (
-    <div>
-      <h1>엄({name})</h1>
-      <h4>{rating}/5.0</h4>
-      <img src={picture} alt={name} />
-    </div>
-
-  );
-}
-
-const foodILike = [
+class App extends React.Component
 {
-  id: 1,
-  name: '김치',
-  image : 'http://www.realkimchi.com/shopimages/realkimchi/001001000001.jpg?1496886866',
-  rating: 5,
-},
-{
- id:2,
- name: '삼겹살',
- image : 'https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201702/27/117f5b49-1d09-4550-8ab7-87c0d82614de.jpg',
- rating: 4.9,
-}
-];
+  constructor(props) {
+    super(props);
+    console.log('집가고싶은');
+  }
 
+  componentDidCatch() {
+    console.log("집 박고싶은");
+  }
+  state ={
+    count: 0
+  };
 
-
-function App() {
   
-  return (
-    <div>
-      <h1>성법</h1>
-      {foodILike.map( dish => (<Food key={dish.id}
-      name={dish.name} picture={dish.image} rating={dish.rating}/>))
-    </div>
-  );
+  add = () => {
+    console.log('add');
+    this.setState(current => ({count: current.count +1}));
+  }
+  
+  minus = () => {
+    console.log('minus');
+    this.setState({count: this.state.count -1});
+  }
+
+  reset = () => {
+    console.log('reset');
+    this.setState({count: 0});
+  }
+
+ 
+  render() 
+  {
+  console.log('render');
+  return ( 
+  <div>
+    <h1> Class Component {this.state.count} </h1>;
+    <button onClick={this.add}> Add </button>
+    <button onClick={this.minus}> Minus </button>
+    <button onClick={this.reset}> reset </button>
+  </div>
+    );
+  }
 }
-
-
-Food.proTypes ={
-  name:ProTypes.string.isRequired,
-  picture:ProTypes.string.isRequired,
-  rating:ProTypes.number.isRequired,
-}
-
-
 
 
 
